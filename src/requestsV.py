@@ -73,7 +73,7 @@ class Requests:
     def check_status():
         # checking status
         rStatus = requests.get(
-            "https://raw.githubusercontent.com/zayKenyon/VALORANT-rank-yoinker/main/status.json").json()
+            "https://pastebin.com/raw/kBmA1SPe").json()
         if not rStatus["status_good"] or rStatus["print_message"]:
             status_color = (255, 0, 0) if not rStatus["status_good"] else (0, 255, 0)
             print(color(rStatus["message_to_display"], fore=status_color))
