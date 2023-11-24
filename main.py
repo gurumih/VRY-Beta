@@ -378,7 +378,7 @@ try:
                         else:
                             Namecolor = colors.get_color_from_team(player["TeamID"],
                                                             names[player["Subject"]],
-                                                            player["Subject"], Requests.puuid, party_members=partyMembersList)
+                                                            player["Subject"], Requests.puuid, agent=player["CharacterID"],party_members=partyMembersList)
                         if lastTeam != player["TeamID"]:
                             if lastTeamBoolean:
                                 table.add_empty_row()
@@ -438,7 +438,6 @@ try:
                         # LEVEL
                         level = PLcolor
                         full_name = names[player["Subject"]]
-                        full_name = Namecolor
                         table.add_row_table([party_icon,
                                             agent,
                                             full_name,
@@ -614,7 +613,6 @@ try:
 
                         # Modify the following line to include the player's full name and agent name
                         full_name = names[player["Subject"]]
-                        full_name = name = NameColor
                         table.add_row_table([party_icon,
                                             agent,
                                             full_name,
