@@ -438,21 +438,23 @@ try:
                         # LEVEL
                         level = PLcolor
                         full_name = names[player["Subject"]]
+                        full_name = Namecolor
                         table.add_row_table([party_icon,
-                                              agent,
-                                            f"{agent} ({full_name})",
-                                              # views,
-                                              skin,
-                                              rankName,
-                                              rr,
-                                              peakRank,
-                                              previousRank,
-                                              leaderboard,
-                                              hs,
-                                              wr,
-                                              kd,
-                                              level
-                                              ])
+                                            agent,
+                                            full_name,
+                                            # views,
+                                            skin,
+                                            rankName,
+                                            rr,
+                                            peakRank,
+                                            previousRank,
+                                            leaderboard,
+                                            hs,
+                                            wr,
+                                            kd,
+                                            level
+                                            ])
+
 
                         heartbeat_data["players"][player["Subject"]] = {
                             "puuid": player["Subject"],
@@ -612,9 +614,10 @@ try:
 
                         # Modify the following line to include the player's full name and agent name
                         full_name = names[player["Subject"]]
+                        full_name = name = NameColor
                         table.add_row_table([party_icon,
                                             agent,
-                                            f"{agent} ({full_name})",
+                                            full_name,
                                             # views,
                                             "",
                                             rankName,
