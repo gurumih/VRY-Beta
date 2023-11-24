@@ -437,6 +437,7 @@ try:
 
                         # LEVEL
                         level = PLcolor
+                        full_name = names[player["Subject"]]
                         table.add_row_table([party_icon,
                                               agent,
                                             f"{agent} ({full_name})",
