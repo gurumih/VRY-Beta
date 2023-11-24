@@ -372,13 +372,14 @@ try:
 
 
                         if player["PlayerIdentity"]["Incognito"]:
-                            Namecolor = colors.get_color_from_team(player["TeamID"],
-                                                            f"{names[player['Subject']]}#{player['PlayerIdentity']['TagLine']}",
-                                                            player["Subject"], Requests.puuid, party_members=partyMembersList)
+                            NameColor = colors.get_color_from_team(player["TeamID"],
+                                                                f"{names[player['Subject']]}#{player['PlayerIdentity']['TagLine']}",
+                                                                player["Subject"], Requests.puuid, agent=player["CharacterID"], party_members=partyMembersList)
                         else:
-                            Namecolor = colors.get_color_from_team(player["TeamID"],
-                                                            names[player["Subject"]],
-                                                            player["Subject"], Requests.puuid, party_members=partyMembersList)
+                            NameColor = colors.get_color_from_team(player["TeamID"],
+                                                                f"{names[player['Subject']]}#{player['PlayerIdentity']['TagLine']}",
+                                                                player["Subject"], Requests.puuid, party_members=partyMembersList)
+
                         if lastTeam != player["TeamID"]:
                             if lastTeamBoolean:
                                 table.add_empty_row()
