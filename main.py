@@ -372,14 +372,13 @@ try:
 
 
                         if player["PlayerIdentity"]["Incognito"]:
-                            NameColor = colors.get_color_from_team(player["TeamID"],
-                                                                f"{names[player['Subject']]}#{player['PlayerIdentity']['TagLine']}",
-                                                                player["Subject"], Requests.puuid, agent=player["CharacterID"], party_members=partyMembersList)
+                            Namecolor = colors.get_color_from_team(player["TeamID"],
+                                                            names[player["Subject"]],
+                                                            player["Subject"], Requests.puuid, agent=player["CharacterID"], party_members=partyMembersList)
                         else:
-                            NameColor = colors.get_color_from_team(player["TeamID"],
-                                                                f"{names[player['Subject']]}#{player['PlayerIdentity']['TagLine']}",
-                                                                player["Subject"], Requests.puuid, party_members=partyMembersList)
-
+                            Namecolor = colors.get_color_from_team(player["TeamID"],
+                                                            names[player["Subject"]],
+                                                            player["Subject"], Requests.puuid, party_members=partyMembersList)
                         if lastTeam != player["TeamID"]:
                             if lastTeamBoolean:
                                 table.add_empty_row()
@@ -439,20 +438,20 @@ try:
                         # LEVEL
                         level = PLcolor
                         table.add_row_table([party_icon,
-                                            agent,
-                                            Namecolor,
-                                            skin,
-                                            rankName,
-                                            rr,
-                                            peakRank,
-                                            previousRank,
-                                            leaderboard,
-                                            hs,
-                                            wr,
-                                            kd,
-                                            level
-                                            ])
-
+                                              agent,
+                                            f"{agent} ({full_name})",
+                                              # views,
+                                              skin,
+                                              rankName,
+                                              rr,
+                                              peakRank,
+                                              previousRank,
+                                              leaderboard,
+                                              hs,
+                                              wr,
+                                              kd,
+                                              level
+                                              ])
 
                         heartbeat_data["players"][player["Subject"]] = {
                             "puuid": player["Subject"],
@@ -612,8 +611,21 @@ try:
 
                         # Modify the following line to include the player's full name and agent name
                         full_name = names[player["Subject"]]
-                        table.add_row_table([party_icon, agent, f"{agent} {NameColor} {full_name}", "", rankName, rr, peakRank, previousRank, leaderboard, hs, wr, kd, level])
-
+                        table.add_row_table([party_icon,
+                                            agent,
+                                            f"{agent} ({full_name})",
+                                            # views,
+                                            "",
+                                            rankName,
+                                            rr,
+                                            peakRank,
+                                            previousRank,
+                                            leaderboard,
+                                            hs,
+                                            wr,
+                                            kd,
+                                            level,
+                                            ])
 
                         heartbeat_data["players"][player["Subject"]] = {
                             "name": full_name,
