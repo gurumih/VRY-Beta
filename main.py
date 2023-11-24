@@ -500,17 +500,14 @@ try:
                 Players = pregame_stats["AllyTeam"]["Players"]
                 presences.wait_for_presence(namesClass.get_players_puuid(Players))
                 names = namesClass.get_names_from_puuids(Players)
-                #temporary until other regions gets fixed?
-                # loadouts = loadoutsClass.get_match_loadouts(pregame.get_pregame_match_id(), pregame_stats, cfg.weapon, valoApiSkins, names,
-                                            #   state="pregame")
+
                 playersLoaded = 1
                 with richConsole.status("Loading Players...") as status:
-                # with alive_bar(total=len(Players), title='Fetching Players', bar='classic2') as bar:
                     presence = presences.get_presence()
                     partyOBJ = menu.get_party_json(namesClass.get_players_puuid(Players), presence)
                     partyMembers = menu.get_party_members(Requests.puuid, presence)
                     partyMembersList = [a["Subject"] for a in partyMembers]
-                    # log(f"retrieved names dict: {names}")
+
                     Players.sort(key=lambda Players: Players["PlayerIdentity"].get("AccountLevel"), reverse=True)
                     partyCount = 0
                     partyIcons = {}
@@ -531,20 +528,13 @@ try:
                                     # PARTY_ICON
                                     party_icon = partyIcons[party]
                                 partyCount += 1
+
                         playerRank = rank.get_rank(player["Subject"], seasonID)
                         previousPlayerRank = rank.get_rank(player["Subject"], previousSeasonID)
 
                         if player["Subject"] == Requests.puuid:
                             if cfg.get_feature_flag("discord_rpc"):
                                 rpc.set_data({"rank": playerRank["rank"], "rank_name": colors.escape_ansi(NUMBERTORANKS[playerRank["rank"]]) + " | " + str(playerRank["rr"]) + "rr"})
-                        # rankStatus = playerRank[1]
-                        #useless code since rate limit is handled in the requestsV
-                        # while not rankStatus:
-                        #     print("You have been rate limited, 😞 waiting 10 seconds!")
-                        #     time.sleep(10)
-                        #     playerRank = rank.get_rank(player["Subject"], seasonID)
-                        #     rankStatus = playerRank[1]
-                        # playerRank = playerRank[0]
 
                         ppstats = pstats.get_stats(player["Subject"])
                         hs = ppstats["hs"]
@@ -553,12 +543,12 @@ try:
                         player_level = player["PlayerIdentity"].get("AccountLevel")
                         if player["PlayerIdentity"]["Incognito"]:
                             NameColor = colors.get_color_from_team(pregame_stats['Teams'][0]['TeamID'],
-                                                            names[player["Subject"]],
-                                                            player["Subject"], Requests.puuid, agent=player["CharacterID"], party_members=partyMembersList)
+                                                                names[player["Subject"]],
+                                                                player["Subject"], Requests.puuid, agent=player["CharacterID"], party_members=partyMembersList)
                         else:
                             NameColor = colors.get_color_from_team(pregame_stats['Teams'][0]['TeamID'],
-                                                            names[player["Subject"]],
-                                                            player["Subject"], Requests.puuid, party_members=partyMembersList)
+                                                                names[player["Subject"]],
+                                                                player["Subject"], Requests.puuid, party_members=partyMembersList)
 
                         if player["PlayerIdentity"]["HideAccountLevel"]:
                             if player["Subject"] == Requests.puuid or player["Subject"] in partyMembersList or hide_levels == False:
@@ -593,7 +583,7 @@ try:
                         rankName = NUMBERTORANKS[playerRank["rank"]]
                         if cfg.get_feature_flag("aggregate_rank_rr") and cfg.table.get("rr"):
                             rankName += f" ({playerRank['rr']})"
-
+                        
                         # RANK RATING
                         rr = playerRank["rr"]
 
@@ -619,24 +609,26 @@ try:
                         # LEVEL
                         level = PLcolor
 
+                        # Modify the following line to include the player's full name and agent name
+                        full_name = names[player["Subject"]]
                         table.add_row_table([party_icon,
-                                              agent,
-                                              name,
-                                              # views,
-                                              "",
-                                              rankName,
-                                              rr,
-                                              peakRank,
-                                              previousRank,
-                                              leaderboard,
-                                              hs,
-                                              wr,
-                                              kd,
-                                              level,
-                                              ])
+                                            agent,
+                                            f"{agent} ({full_name})",
+                                            # views,
+                                            "",
+                                            rankName,
+                                            rr,
+                                            peakRank,
+                                            previousRank,
+                                            leaderboard,
+                                            hs,
+                                            wr,
+                                            kd,
+                                            level,
+                                            ])
 
                         heartbeat_data["players"][player["Subject"]] = {
-                            "name": names[player["Subject"]],
+                            "name": full_name,
                             "partyNumber": partyNum if party_icon != "" else 0,
                             "agent": agent_dict[player["CharacterID"].lower()],
                             "rank": playerRank["rank"],
@@ -648,8 +640,7 @@ try:
                             "headshotPercentage": ppstats["hs"],
                             "winPercentage": f"{playerRank['wr']} ({playerRank['numberofgames']})",
                         }
-
-                        # bar()
+                    # bar()
             if game_state == "MENUS":
                 already_played_with = []
                 Players = menu.get_party_members(Requests.puuid, presence)
