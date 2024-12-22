@@ -370,11 +370,11 @@ try:
                         if player["PlayerIdentity"]["Incognito"]:
                             Namecolor = colors.get_color_from_team(player["TeamID"],
                                                             names[player["Subject"]],
-                                                            player["Subject"], Requests.puuid, agent=player["CharacterID"], party_members=partyMembersList)
+                                                            player["Subject"], Requests.puuid, party_members=partyMembersList)
                         else:
                             Namecolor = colors.get_color_from_team(player["TeamID"],
                                                             names[player["Subject"]],
-                                                            player["Subject"], Requests.puuid, agent=player["CharacterID"], party_members=partyMembersList)
+                                                            player["Subject"], Requests.puuid, party_members=partyMembersList)
                         if lastTeam != player["TeamID"]:
                             if lastTeamBoolean:
                                 table.add_empty_row()
@@ -550,11 +550,11 @@ try:
                         if player["PlayerIdentity"]["Incognito"]:
                             NameColor = colors.get_color_from_team(pregame_stats['Teams'][0]['TeamID'],
                                                             names[player["Subject"]],
-                                                            player["Subject"], Requests.puuid, agent=player["CharacterID"], party_members=partyMembersList)
+                                                            player["Subject"], Requests.puuid, party_members=partyMembersList)
                         else:
                             NameColor = colors.get_color_from_team(pregame_stats['Teams'][0]['TeamID'],
                                                             names[player["Subject"]],
-                                                            player["Subject"], Requests.puuid, agent=player["CharacterID"], party_members=partyMembersList)
+                                                            player["Subject"], Requests.puuid, party_members=partyMembersList)
 
                         if player["PlayerIdentity"]["HideAccountLevel"]:
                             if player["Subject"] == Requests.puuid or player["Subject"] in partyMembersList or hide_levels == False:
