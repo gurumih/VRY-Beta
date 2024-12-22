@@ -327,7 +327,7 @@ try:
                                         already_played_with.append(
                                                 {
                                                     "times": times,
-                                                    "name": agent_dict[player["CharacterID"].lower()] + " on " + team_string + " team",
+                                                    "name": curr_player_stat["name"] + " on " + team_string + " team",
                                                     "agent": curr_player_stat["agent"],
                                                     "time_diff": time.time() - curr_player_stat["epoch"]
                                                 })
@@ -374,7 +374,7 @@ try:
                         else:
                             Namecolor = colors.get_color_from_team(player["TeamID"],
                                                             names[player["Subject"]],
-                                                            player["Subject"], Requests.puuid, party_members=partyMembersList)
+                                                            player["Subject"], Requests.puuid, agent=player["CharacterID"], party_members=partyMembersList)
                         if lastTeam != player["TeamID"]:
                             if lastTeamBoolean:
                                 table.add_empty_row()
@@ -554,7 +554,7 @@ try:
                         else:
                             NameColor = colors.get_color_from_team(pregame_stats['Teams'][0]['TeamID'],
                                                             names[player["Subject"]],
-                                                            player["Subject"], Requests.puuid, party_members=partyMembersList)
+                                                            player["Subject"], Requests.puuid, agent=player["CharacterID"], party_members=partyMembersList)
 
                         if player["PlayerIdentity"]["HideAccountLevel"]:
                             if player["Subject"] == Requests.puuid or player["Subject"] in partyMembersList or hide_levels == False:
